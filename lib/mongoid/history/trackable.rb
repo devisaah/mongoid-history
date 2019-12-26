@@ -14,7 +14,7 @@ module Mongoid
           unless history_options.options[:modifier_field].nil?
             belongs_to_modifier_options = { class_name: Mongoid::History.modifier_class_name }
             belongs_to_modifier_options[:inverse_of] = history_options.options[:modifier_field_inverse_of] if history_options.options.key?(:modifier_field_inverse_of)
-            belongs_to_modifier_options[:optional] = true if history_options.options[:modifier_field_optional] && Mongoid::Compatibility::Version.mongoid6_or_newer?
+            belongs_to_modifier_options[:optional] = true if history_options.options[:modifier_field_optional] || Mongoid::Compatibility::Version.mongoid6_or_newer?
             belongs_to history_options.options[:modifier_field].to_sym, belongs_to_modifier_options
           end
 
